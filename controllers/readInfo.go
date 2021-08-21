@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	sc "apiStore/schema"
 	"encoding/csv"
 	"encoding/json"
 	"fmt"
@@ -25,7 +26,8 @@ func ReadBuyersJson() {
 
 	// we initialize our Users array
 	//Info
-	var buyers []Buyer
+
+	var buyers []sc.Buyer
 
 	// we unmarshal our byteArray which contains our jsonFile's content into 'users' which we defined above
 	json.Unmarshal(byteValue, &buyers)
@@ -33,7 +35,7 @@ func ReadBuyersJson() {
 
 }
 
-func ReadProductsCsv() []Product {
+func ReadProductsCsv() []sc.Product {
 
 	dFile, err := os.Open("../Info/products.csv")
 	if err != nil {
@@ -45,7 +47,7 @@ func ReadProductsCsv() []Product {
 	r.Comma = ','
 	r.FieldsPerRecord = 3
 
-	var products []Product
+	var products []sc.Product
 	//Leer linea por línea
 	for {
 		record, err := r.Read()
@@ -58,7 +60,7 @@ func ReadProductsCsv() []Product {
 		}
 
 		//Mirar vacio
-		productNew := Product{
+		productNew := sc.Product{
 			Id:   record[0],
 			Name: record[1],
 		}
@@ -82,12 +84,12 @@ func ReadProductsCsv() []Product {
 
 func readInfoTxt() {
 
-	transactionsAll := Transaction{
+	transactionsAll := sc.Transaction{
 
 		Id:       "#0000611ef080",
 		Buyer_id: "c9288b31",
 		Ip:       "126.238.179.254",
-		device:   "android",
+		Device:   "android",
 		Products: []string{"96028f6d", "7c6b9e30"},
 	}
 
