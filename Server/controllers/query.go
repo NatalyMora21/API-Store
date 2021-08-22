@@ -5,11 +5,10 @@ import (
 	sc "apiStore/schema"
 	"context"
 	"encoding/json"
-	"fmt"
 	"log"
 )
 
-func Getproducts() {
+func Getproducts() []sc.Product {
 
 	dgraphClient := db.ConnectionDgraph()
 	txn := dgraphClient.NewTxn()
@@ -40,7 +39,7 @@ func Getproducts() {
 		log.Fatal(err)
 	}
 
-	fmt.Println(r.Products[0])
+	return r.Products
 
 	/*out, _ := json.MarshalIndent(r, "", "\t")
 	fmt.Printf("%s\n", out)*/
